@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dark Verse Ditzzy</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Orbitron&family=Press+Start+2P&family=Russo+One&display=swap" rel="stylesheet">
+<style>
+body{
+margin:0;
+font-family:'Roboto',sans-serif;
+color:white;
+overflow-x:hidden;
+background:black;
+}
+/* BACKGROUND */
+body::before{
+content:'';
+positio#genren:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:url('https://raw.githubusercontent.com/dianeshalnaura-sketch/gojo/abae37e68e6ea5e15e8e1b4a9dbe252a258a19f8/db81e1c765bfb08a732e159fb302980c.jpg') center/cover;
+z-index:-2;
+animation:zoomBg 25s infinite alternate;
+}
+body::after{
+content:'';
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.72);
+z-index:-1;
+}
+@keyframes zoomBg{
+0%{transform:scale(1);}
+100%{transform:scale(1.18);}
+}
+/* PAGE */
+.page{
+display:none;
+padding:20px 20px 1px;
+max-width:480px;
+margin:auto;
+}
+.active{
+display:block;
+}
+/* CARD */
+.card{
+background:rgba(10,10,10,0.65);
+border-radius:14px;
+padding:14px;
+margin-bottom:9px;
+backdrop-filter:blur(6px);
+}
+/* VIDEO */
+.gojo{
+border:2px solid #ff1e1e;
+box-shadow:0 0 15px #ff0000;
+}
+video{
+width:100%;
+border-radius:10px;
+}
+iframe{
+border-radius:10px;
+margin-top:10px;
+}
+/* TITLE */
+h2{
+font-size:15px;
+margin-top:-20;
+}
+.title-wrapper{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:10px;
+font-family:'Russo One';
+font-size:13px;
+}
+.audio-btn{
+background:none;
+border:none;
+cursor:pointer;
+}
+.audio-btn img{
+width:24px;
+}
+/* MENU */
+.menu-wrapper{
+overflow-x:auto;
+padding-bottom:5px;
+}
+.menu-wrapper::-webkit-scrollbar{
+display:none;
+}
+.menu-grid{
+display:grid;
+grid-auto-flow:column;
+grid-template-rows:repeat(2,auto);
+gap:12px;
+min-width:max-content;
+}
+.menu-item{
+width:65px;
+text-align:center;
+font-family:'Russo One';
+font-size:10px;
+cursor:pointer;
+}
+.menu-icon{
+width:46px;
+height:46px;
+border-radius:50%;
+background:#111;
+border:1px solid #444;
+margin:auto;
+margin-bottom:4px;
+overflow:hidden;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+.menu-icon img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+/* NEWS */
+.news-grid{
+display:flex;
+gap:10px;
+overflow-x:auto;
+scroll-behavior:smooth;
+padding-bottom:5px;
+}
+.news-grid::-webkit-scrollbar{
+display:none;
+}
+.news-box{
+min-width:180px;
+height:110px;
+border-radius:10px;
+overflow:hidden;
+border:2px solid rgba(255,0,0,0.4);
+flex-shrink:0;
+}
+.news-box img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.anime-box{
+  background:#111;
+  padding:8px;
+  border-radius:10px;
+  text-align:center;
+  font-size:11px;
+  margin-bottom:10px;
+}
+
+.anime-box img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-bottom:6px;
+}
+
+.anime-title{
+  font-family:'Russo One';
+  font-size:12px;
+  margin-bottom:4px;
+  color:#00eaff;
+}
+
+.anime-synopsis{
+  font-size:10px;
+  color:#ccc;
+  margin-bottom:6px;
+}
+
+/* ANIME PAGE */
+#animeResult{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:10px;
+  max-height:400px;
+  overflow-y:auto;
+}
+
+.anime-box{
+  background:#111;
+  padding:8px;
+  border-radius:10px;
+  text-align:center;
+  font-size:11px;
+}
+
+.anime-box img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:8px;
+  margin-bottom:6px;
+}
+
+#genreList{
+  max-height:0;              /* default tertutup */
+  overflow-y:hidden;         /* pas tutup, nggak bisa scroll */
+  transition:0.3s;
+}
+
+#genreList.active{
+  max-height:300px;          /* tinggi maksimal saat dibuka */
+  overflow-y:auto;           /* bisa scroll vertikal */
+}
+
+#genreList div{
+  background:#111;
+  padding:10px;
+  margin-top:5px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
+}
+
+/* ACCOUNT */
+.account-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+font-family:'Russo One';
+}
+.account-box{
+background:#0f0f0f;
+padding:10px;
+border-radius:10px;
+box-shadow:0 0 8px rgba(255,0,0,0.2);
+font-size:12px;
+}
+.profile-box{
+display:flex;
+align-items:center;
+gap:10px;
+}
+.profile-icon{
+width:38px;
+height:38px;
+border-radius:50%;
+border:2px solid #ff0000;
+}
+.section-title{
+font-family:'Russo One';
+font-size:13px;
+margin-bottom:8px;
+color:#ff4d4d;
+}
+/* BUG */
+input{
+width:100%;
+padding:10px;
+border-radius:8px;
+border:1px solid #222;
+background:#080808;
+color:white;
+margin-top:10px;
+font-size:12px;
+}
+.btn{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+background:#ff0000;
+color:white;
+font-family:'Orbitron';
+font-size:12px;
+}
+.dropdown-btn{
+margin-top:10px;
+background:#111;
+padding:10px;
+border-radius:8px;
+border:1px solid #ff0000;
+display:flex;
+justify-content:space-between;
+font-size:12px;
+}
+.dropdown-list{
+max-height:0;
+overflow:hidden;
+transition:0.3s;
+}
+.dropdown-list.active{
+max-height:200px;
+}
+.dropdown-list div{
+background:#111;
+padding:10px;
+margin-top:5px;
+border-radius:8px;
+cursor:pointer;
+font-size:12px;
+}
+.back-btn{
+position:fixed;
+top:10px;
+left:10px;
+width:36px;
+height:36px;
+border-radius:10px;
+background:rgba(0,0,0,0.6);
+border:1px solid rgba(255,0,0,0.5);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+color:white;
+cursor:pointer;
+z-index:999;
+}
+/* Dropdown Genre */
+.dropdown-list{
+  max-height:0;
+  overflow-y:auto;
+  transition:0.3s;
+  border:1px solid #ff0000;
+  border-radius:8px;
+  margin-top:5px;
+}
+
+.dropdown-list.active{
+  max-height:200px;
+}
+
+.dropdown-list div{
+  background:#111;
+  padding:10px;
+  cursor:pointer;
+  font-size:12px;
+  border-bottom:1px solid #222;
+}
+
+.monitor{
+margin-top:10px;
+height:150px;
+background:#000;
+padding:10px;
+border-radius:10px;
+overflow:auto;
+font-size:11px;
+font-family:monospace;
+}
+.success{color:#39ff14;}
+.error{color:#ff3b3b;}
+.info{color:#fff;}
+.bar{
+height:5px;
+background:#111;
+margin-top:6px;
+border-radius:3px;
+}
+.fill{
+height:100%;
+width:0%;
+background:#ff0000;
+border-radius:3px;
+}
+/* ANIME GRID */
+#animeResult{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:10px;
+}
+.anime-box{
+background:#111;
+padding:8px;
+border-radius:10px;
+text-align:center;
+font-size:11px;
+}
+.anime-box img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:6px;
+}
+.anime-title{font-weight:bold;margin-bottom:4px;}
+.anime-synopsis{font-size:10px;color:#ccc;height:50px;overflow:hidden;margin-bottom:4px;}
+</style>
+</head>
+<body>
+<!-- HOME -->
+<div class="page active" id="home">
+<div class="card gojo">
+<h2 style="font-family:'Black Ops One';font-size:28px;color:#00eaff;">
+Yuji Project 1.0
+</h2>
+<video id="mainVideo" autoplay muted loop>
+<source src="https://raw.githubusercontent.com/dianeshalnaura-sketch/gojo/dcadc215c8685ac16228b33651497cbed45758c9/VID_20260404182636.mp4">
+</video>
+<div class="title-wrapper">
+<div>🔥 Dark Verse Ditzzy 👾</div>
+<button class="audio-btn" onclick="toggleSound()">
+<span id="speakerIcon">🔇</span>
+</button>
+</div>
+</div>
+<!-- Menu Card & News & Account Card sama seperti SC lo sebelumnya -->
+<div class="card"><div class="section-title">Menu</div><div class="menu-wrapper">
+<div class="menu-grid">
+<div class="menu-item" onclick="nav('bug')"><div class="menu-icon"></div>Menu BUG</div>
+<div class="menu-item" onclick="buyPrem()"><div class="menu-icon"></div>Buy Prem</div>
+<div class="menu-item" onclick="window.open('https://t.me/USERNAME_TELEGRAM')"><div class="menu-icon"></div>Customer</div>
+<div class="menu-item" onclick="nav('anime')"><div class="menu-icon"></div>Anime</div>
+</div></div></div>
+<div class="card"><div class="section-title">Latest News</div><div class="news-grid">
+<div class="news-box"><img src="https://i.imgur.com/ZcLLrkY.jpeg"></div>
+<div class="news-box"><img src="https://i.imgur.com/ZcLLrkY.jpeg"></div>
+<div class="news-box"><img src="https://i.imgur.com/ZcLLrkY.jpeg"></div>
+</div></div>
+<div class="card"><div class="section-title">Account Statistik</div>
+<div class="account-grid">
+<div class="account-box profile-box">
+<div class="profile-icon"></div>
+<div>USERNAME<br><b>Ditzzy Official</b></div>
+</div>
+<div class="account-box">Role : Developer<br>Status : Online</div>
+<div class="account-box">Expired : 05-08-2058</div>
+<div class="account-box">Ping : <span id="pingValue">56 ms</span></div>
+</div>
+</div>
+</div>
+
+<!-- BUG PAGE -->
+<div class="page" id="bug">
+<div class="back-btn" onclick="nav('home')">←</div>
+<div class="card">
+<h2>Bug System</h2>
+<input id="target" placeholder="Masukan nomor">
+<div class="dropdown-btn" onclick="toggleDropdown()">
+<span id="selectedBug">Pilih Bug</span><span>▼</span>
+</div>
+<div class="dropdown-list" id="dropdownList">
+<div onclick="selectBug('Force Close')">Force Close</div>
+<div onclick="selectBug('Delay')">Delay</div>
+<div onclick="selectBug('Crash UI')">Crash UI</div>
+</div>
+<button class="btn" id="btn" onclick="run()">Execute</button>
+<div class="monitor" id="monitor">> system ready...</div>
+<div class="bar"><div class="fill" id="bar"></div></div>
+</div>
+</div>
+
+<!<!-- ANIME PAGE -->
+<div class="page" id="anime">
+  <button class="back-btn" onclick="nav('home')">←</button>
+  <div class="card">
+    <h2>Anime Finder</h2>
+
+    <!-- Input pencarian -->
+    <input id="animeSearch" placeholder="Cari anime...">
+
+    <!-- Dropdown genre -->
+    <div class="dropdown-btn" onclick="toggleGenreDropdown()">
+      <span id="selectedGenre">Pilih Genre</span> <span>▼</span>
+    </div>
+    <div class="dropdown-list" id="genreList">
+      <div data-id="">Semua Genre</div>
+      <div data-id="1">Action</div>
+      <div data-id="2">Adventure</div>
+      <div data-id="4">Comedy</div>
+      <div data-id="8">Drama</div>
+      <div data-id="10">Fantasy</div>
+      <div data-id="22">Romance</div>
+      <div data-id="23">School</div>
+      <div data-id="24">Sci-Fi</div>
+      <div data-id="27">Shounen</div>
+      <div data-id="41">Supernatural</div>
+      <div data-id="30">Revenge</div>
+      <div data-id="32">Hentai</div>
+      <div data-id="36">masocist</div>
+      <div data-id="40">Yandere</div>
+    </div>
+
+    <!-- Tombol cari -->
+    <button class="btn" onclick="searchAnime()">Cari Anime</button>
+
+    <!-- Hasil anime -->
+    <div id="animeResult"></div>
+  </div>
+</div>
+
+<script>
+function nav(p){
+document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));
+document.getElementById(p).classList.add('active');
+window.scrollTo(0,0);
+}
+
+/* AUDIO */
+function toggleSound(){
+const video = document.getElementById("mainVideo");
+const icon = document.getElementById("speakerIcon");
+
+if(video.muted){
+video.muted = false;
+icon.innerText = "🔊";
+}else{
+video.muted = true;
+icon.innerText = "🔇";
+}
+}
+
+/* BUY */
+function buyPrem(){window.open("https://t.me/CHANNEL_PREMIUM");}
+
+/* ANIME SEARCH via Jikan API */
+ async function searchAnime(){
+  const keyword = document.getElementById("animeSearch").value.trim().toLowerCase();
+  const genre = document.getElementById("genreFilter").value;
+  const result = document.getElementById("animeResult");
+
+  if(!keyword){
+    result.innerHTML = "Masukkan keyword!";
+    return;
+  }
+
+  result.innerHTML = "Loading anime...";
+
+  try{
+    const res = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(keyword)}&order_by=popularity&limit=12`);
+    const data = await res.json();
+    result.innerHTML = "";
+
+    let filtered = data.data.filter(anime => {
+      // keyword di title atau synopsis
+      let matchKeyword = anime.title.toLowerCase().includes(keyword) || 
+                         (anime.synopsis && anime.synopsis.toLowerCase().includes(keyword));
+      // filter genre jika dipilih
+      let matchGenre = true;
+      if(genre){
+        matchGenre = anime.genres.some(g => g.mal_id == genre);
+      }
+      return matchKeyword && matchGenre;
+    });
+
+    if(filtered.length === 0){
+      result.innerHTML = "Anime tidak ditemukan sesuai keyword/genre.";
+      return;
+    }
+
+    filtered.forEach(anime => {
+      result.innerHTML += `
+        <div class="anime-box">
+          <img src="${anime.images.jpg.image_url}">
+          <div class="anime-title"><b>${anime.title}</b></div>
+          <div class="anime-synopsis">${anime.synopsis ? anime.synopsis.slice(0,180) + '...' : 'No description'}</div>
+          <button class="btn" onclick="window.open('${anime.url}')">Lihat di MAL</button>
+        </div>
+      `;
+    });
+
+  }catch(e){
+    result.innerHTML = "Gagal load anime.";
+    console.error(e);
+  }
+}
+
+
+let selectedGenreId = "";
+
+// Toggle dropdown genre
+function toggleGenreDropdown(){
+  document.getElementById("genreList").classList.toggle("active");
+}
+
+// Pilih genre
+document.querySelectorAll("#genreList div").forEach(item=>{
+  item.addEventListener("click",()=>{
+    selectedGenreId = item.getAttribute("data-id");
+    document.getElementById("selectedGenre").innerText = item.innerText;
+    document.getElementById("genreList").classList.remove("active");
+  });
+});
+
+// Cari anime
+async function searchAnime(){
+  let name = document.getElementById("animeSearch").value;
+  let result = document.getElementById("animeResult");
+  result.innerHTML = "Loading...";
+
+  let url = `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(name)}&limit=12`;
+  if(selectedGenreId) url += `&genres=${selectedGenreId}`;
+
+  try{
+    let res = await fetch(url);
+    let data = await res.json();
+    result.innerHTML = "";
+
+    data.data.forEach(anime=>{
+      result.innerHTML += `
+      <div class="anime-box">
+        <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+        <h3>${anime.title}</h3>
+        <p>${anime.synopsis ? anime.synopsis.substring(0, 100)+"..." : ""}</p>
+        <button class="btn" onclick="window.open('https://myanimelist.net/anime/${anime.mal_id}')">Detail</button>
+      </div>
+      `;
+    });
+  } catch(e){
+    result.innerHTML = "Error load anime...";
+    console.error(e);
+  }
+}
+
+/* BUG SYSTEM */
+let bug="";
+function toggleDropdown(){document.getElementById("dropdownList").classList.toggle("active");}
+function selectBug(v){bug=v;document.getElementById("selectedBug").innerText=v;document.getElementById("dropdownList").classList.remove("active");}
+function delay(ms){return new Promise(r=>setTimeout(r,ms));}
+async function typeLog(text,cls="info"){
+let m=document.getElementById("monitor");
+let line=document.createElement("div");
+line.className=cls;
+m.appendChild(line);
+let full="🥀 "+text;
+for(let i=0;i<full.length;i++){
+line.innerText+=full[i];
+m.scrollTop=m.scrollHeight;
+await delay(90);
+}
+}
+
+function toggleGenreDropdown(){
+  document.getElementById("genreList").classList.toggle("active");
+}
+
+async function run(){
+let t=document.getElementById("target").value;
+if(!t||!bug){await typeLog("error input","error");return;}
+let btn=document.getElementById("btn");btn.disabled=true;
+await typeLog("target : "+t);
+await typeLog("execute : "+bug);
+await typeLog("Connect : Success");
+await typeLog("IP Sender : 917307778");
+await typeLog("Start Send Bug");
+let bar=document.getElementById("bar");
+for(let i=0;i<=100;i+=10){bar.style.width=i+"%";await delay(400);}
+await typeLog("Success ✅","success");
+btn.disabled=false;
+}
+
+/* RANDOM PING */
+function randomPing(){
+let ping=Math.floor(Math.random()*40)+30;
+document.getElementById("pingValue").innerText=ping+" ms";
+}
+setInterval(randomPing,1000);
+</script>
+</body>
+</html>
